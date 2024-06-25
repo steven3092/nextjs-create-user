@@ -9,13 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "5.45.1",
     "@types/react": "npm:types-react@beta",
     "@types/react-dom": "npm:types-react-dom@beta",
     "next": "14.2.4",
-    "react": "^19.0.0-beta-26f2496093-20240514",
-    "react-dom": "^19.0.0-beta-26f2496093-20240514"
+    "react": "18.3.1",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
