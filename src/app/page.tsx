@@ -1,17 +1,19 @@
-"use client";
-import { FormEvent, use, useActionState, useEffect, useState } from "react";
-import { fetchData } from "./api/requests";
-import { Button } from "./components/button";
-import { addUser } from "./form/actions";
-import { useFormState } from "react-dom";
+import { Users } from "./components/user";
+import { QueryClient, dehydrate } from "@tanstack/query-core";
+import { fetchUsers } from "./services/get-users";
+import { HydrationBoundary } from "@tanstack/react-query";
+import { AddUser } from "./components/add-user";
 
-type productsType = {
-  products: [{ Name: string; Price: string; Location: string }];
-};
+export default async function Home() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["get-users"],
+    queryFn: fetchUsers,
+  });
 
-export default function Home() {
   // Trigger fetch data with react 19, with use only.
-  const products = use<productsType>(fetchData());
+  // const products = use(fetchData());
+  // const { data } = use<dataType>(fetchData());
 
   // Trigger fetch data with react before react 19, with useEffect and useState.
   // const [products, setProducts] = useState<productsType>();
@@ -27,23 +29,15 @@ export default function Home() {
   // };
 
   //In Next
-  const [state, submitAction, isPending] = useFormState(addUser, null);
+  // const [stateActionAddUser, submitActionAddUser, isPendingActionAddUser] =
+  //   useFormState(fetchPostUser, null);
 
   return (
     <>
-      <div>{products?.products.map((el) => el.Name)}</div>
-
-      {/* React 18 for submitting forms
-      <form onSubmit={handleOnSubmit}> 
-      */}
-
-      <form action={submitAction}>
-        <label>First name :</label>
-        <input type="text" name="firstName" />
-        Last Name :
-        <input type="text" name="lastName" />
-        <Button name="Submit" type="submit" />
-      </form>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Users />
+        <AddUser />
+      </HydrationBoundary>
     </>
   );
 }
