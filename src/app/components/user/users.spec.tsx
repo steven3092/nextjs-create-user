@@ -1,4 +1,5 @@
 import { QueryClient } from "@tanstack/query-core";
+import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { Users } from "./users";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -34,6 +35,14 @@ jest.mock("../../hooks/use-get-users", () => ({
   }),
 }));
 
+const mockDeleteUserMutation = jest.fn();
+
+jest.mock("../../hooks/use-delete-users", () => ({
+  useDeleteUsers: () => ({
+    deleteUserMutation: mockDeleteUserMutation(),
+  }),
+}));
+
 describe("Users", () => {
   it("should appear in the DOM", () => {
     customRender(<Users />);
@@ -41,5 +50,19 @@ describe("Users", () => {
     const user = screen.getByTestId("lorem ipsum");
 
     expect(user).toBeInTheDocument();
+  });
+});
+
+describe("Click for deleting user", () => {
+  const user = userEvent.setup();
+
+  it("should call useDeleteUsers() hook", () => {
+    customRender(<Users />);
+
+    const deleteButton = screen.getByText("delete");
+
+    user.click(deleteButton);
+
+    expect(mockDeleteUserMutation).toHaveBeenCalled();
   });
 });
