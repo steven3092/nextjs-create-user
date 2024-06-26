@@ -1,10 +1,18 @@
 "use client";
 import React from "react";
 import { useGetUsers } from "../../hooks/use-get-users";
-import { InputDeleteUser } from "../input-delete-user/input-delete-user";
+import { useDeleteUsers } from "../../hooks/use-delete-users";
 
 export const Users = () => {
   const { users, isLoading, isError } = useGetUsers();
+  const { deleteUserMutation } = useDeleteUsers();
+
+  const handleOnClickDeleteUser = async (userId: number) => {
+    await deleteUserMutation.mutateAsync(userId, {
+      onSuccess: () => console.log("User deleted"),
+    });
+    return;
+  };
 
   return (
     <div>
@@ -13,7 +21,11 @@ export const Users = () => {
       {users.map((user, index) => (
         <div key={index}>
           <li data-testid={user.name}>{user.name}</li>
-          <InputDeleteUser userId={user.id} />
+          <input
+            value="delete"
+            type="button"
+            onClick={() => handleOnClickDeleteUser(user.id)}
+          />
         </div>
       ))}
     </div>

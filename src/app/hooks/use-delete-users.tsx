@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchDeleteUser } from "../services/delete-users";
 
-export const useDeleteUsers = (userId: number) => {
+export const useDeleteUsers = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: () => fetchDeleteUser(userId),
+  const deleteUserMutation = useMutation({
+    mutationFn: fetchDeleteUser,
     onSuccess: () => {
       console.log("user deleted");
       queryClient.refetchQueries({ queryKey: ["get-users"] });
@@ -13,11 +13,7 @@ export const useDeleteUsers = (userId: number) => {
     onError: () => console.log("error"),
   });
 
-  const handleDeleteUser = async () => {
-    mutation.mutate();
-  };
-
   return {
-    handleDeleteUser,
+    deleteUserMutation,
   };
 };
