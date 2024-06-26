@@ -1,4 +1,4 @@
-import { useDeleteUsers } from "../hooks/use-delete-users";
+import { useDeleteUsers } from "../../hooks/use-delete-users";
 
 export const InputDeleteUser = ({ userId }: { userId: number }) => {
   const { handleDeleteUser } = useDeleteUsers(userId);
