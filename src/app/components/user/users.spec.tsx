@@ -45,7 +45,7 @@ jest.mock("../../hooks/use-delete-users", () => ({
 
 describe("Users", () => {
   it("should appear in the DOM", () => {
-    customRender(<Users />);
+    render(<Users />);
 
     const user = screen.getByTestId("lorem ipsum");
 
@@ -57,7 +57,7 @@ describe("Click for deleting user", () => {
   const user = userEvent.setup();
 
   it("should call useDeleteUsers() hook", () => {
-    customRender(<Users />);
+    render(<Users />);
 
     const deleteButton = screen.getByText("delete");
 
