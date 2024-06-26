@@ -9,9 +9,9 @@ export const AddUser = () => {
     <>
       <form onSubmit={handleSubmitForm}>
         <label>First name :</label>
-        <input type="text" name="firstName" />
+        <input data-testid="firstName" type="text" name="firstName" />
         Last Name :
-        <input type="text" name="lastName" />
+        <input data-testid="LastName" type="text" name="lastName" />
         <Button name="Submit" type="submit" />
       </form>
     </>
