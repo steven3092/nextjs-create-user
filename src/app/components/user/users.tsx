@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { useGetUsers } from "../../hooks/use-get-users";
-import { useDeleteUsers } from "../../hooks/use-delete-users";
+import { useGetUsers } from "../../hooks/use-get-users/use-get-users";
+import { useDeleteUsers } from "../../hooks/use-delete-users/use-delete-users";
 
 export const Users = () => {
   const { users, isLoading, isError } = useGetUsers();

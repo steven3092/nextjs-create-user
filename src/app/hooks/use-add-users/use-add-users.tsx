@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
-import { usePostUsers } from "./use-post-users";
+import { usePostUsers } from "../use-post-users/use-post-users";
 
-export const useAddUser = () => {
+export const useAddUsers = () => {
   const { createUserMutation } = usePostUsers();
 
   const handleSubmitForm = async (event: FormEvent<HTMLFormElement>) => {

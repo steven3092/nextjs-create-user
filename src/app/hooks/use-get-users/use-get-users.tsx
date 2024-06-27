@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchUsers } from "../services/get-users";
-import { UserDTO } from "../interfaces/users.dto.interface";
+import { fetchUsers } from "../../services/get-users";
+import { UserDTO } from "../../interfaces/users.dto.interface";
 
 export function useGetUsers() {
   const query = useQuery({

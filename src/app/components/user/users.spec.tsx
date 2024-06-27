@@ -29,7 +29,7 @@ const mockUsers = jest.fn().mockReturnValue([
   },
 ]);
 
-jest.mock("../../hooks/use-get-users", () => ({
+jest.mock("../../hooks/use-get-users/use-get-users", () => ({
   useGetUsers: () => ({
     users: mockUsers(),
   }),
@@ -37,7 +37,7 @@ jest.mock("../../hooks/use-get-users", () => ({
 
 const mockDeleteUserMutation = jest.fn();
 
-jest.mock("../../hooks/use-delete-users", () => ({
+jest.mock("../../hooks/use-delete-users/use-delete-users", () => ({
   useDeleteUsers: () => ({
     deleteUserMutation: mockDeleteUserMutation(),
   }),
@@ -45,7 +45,7 @@ jest.mock("../../hooks/use-delete-users", () => ({
 
 describe("Users", () => {
   it("should appear in the DOM", () => {
-    render(<Users />);
+    customRender(<Users />);
 
     const user = screen.getByTestId("lorem ipsum");
 
@@ -57,7 +57,7 @@ describe("Click for deleting user", () => {
   const user = userEvent.setup();
 
   it("should call useDeleteUsers() hook", () => {
-    render(<Users />);
+    customRender(<Users />);
 
     const deleteButton = screen.getByText("delete");
 

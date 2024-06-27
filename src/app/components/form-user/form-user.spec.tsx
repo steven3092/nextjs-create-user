@@ -1,11 +1,28 @@
 import { render, screen } from "@testing-library/react";
-import { AddUser } from "./add-user";
+import { FormUser } from "./form-user";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const customRender = (children: React.ReactElement) => {
+  const testQueryClients = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={testQueryClients}>
+      {children}
+    </QueryClientProvider>
+  );
+};
 
 const mockHandleSubmitForm = jest.fn();
 
-jest.mock("../../hooks/use-add-user", () => ({
-  useAddUser: () => ({
+jest.mock("../../hooks/use-add-users/use-add-users", () => ({
+  useAddUsers: () => ({
     handleSubmitForm: mockHandleSubmitForm(),
   }),
 }));
@@ -13,7 +30,7 @@ jest.mock("../../hooks/use-add-user", () => ({
 describe("When fill the form", () => {
   const user = userEvent.setup();
   it("should call handleSubmitForm function", () => {
-    render(<AddUser />);
+    customRender(<FormUser />);
 
     const firstNameInput = screen.getByTestId("firstName");
     const lastNameInput = screen.getByTestId("LastName");

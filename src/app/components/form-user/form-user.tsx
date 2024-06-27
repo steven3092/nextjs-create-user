@@ -1,9 +1,9 @@
 "use client";
-import { useAddUser } from "../../hooks/use-add-user";
+import { useAddUsers } from "../../hooks/use-add-users/use-add-users";
 import { Button } from "../button/button";
 
-export const AddUser = () => {
-  const { handleSubmitForm } = useAddUser();
+export const FormUser = () => {
+  const { handleSubmitForm } = useAddUsers();
 
   return (
     <>
