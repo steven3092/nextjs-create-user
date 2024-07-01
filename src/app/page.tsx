@@ -1,8 +1,9 @@
-import { Users } from "./components/user/users";
+import { Users } from "./components/users/users";
 import { QueryClient, dehydrate } from "@tanstack/query-core";
 import { fetchUsers } from "./services/get-users";
 import { HydrationBoundary } from "@tanstack/react-query";
 import { FormUser } from "./components/form-user/form-user";
+import { Header } from "./components/header/header";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -35,8 +36,9 @@ export default async function Home() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Users />
+        <Header />
         <FormUser />
+        <Users />
       </HydrationBoundary>
     </>
   );
