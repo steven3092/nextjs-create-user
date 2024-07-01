@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import "./users.scss";
 import { useGetUsers } from "../../hooks/use-get-users/use-get-users";
 import { useDeleteUsers } from "../../hooks/use-delete-users/use-delete-users";
 
@@ -15,19 +16,25 @@ export const Users = () => {
   };
 
   return (
-    <div>
+    <div className="users-block">
       {isLoading && <p>Loading...</p>}
       {isError && <p>An error has occurred</p>}
-      {users.map((user, index) => (
-        <div key={index}>
-          <li data-testid={user.name}>{user.name}</li>
-          <input
-            value="delete"
-            type="button"
-            onClick={() => handleOnClickDeleteUser(user.id)}
-          />
-        </div>
-      ))}
+      {users &&
+        users.map((user, index) => (
+          <div className="users-list" key={index}>
+            <div
+              className="delete-button"
+              data-testid="delete-user-button"
+              onClick={() => handleOnClickDeleteUser(user.id)}
+            />
+            <div
+              className="user"
+              data-testid={`${user.name} ${user.last_name}`}
+            >
+              {user.name} {user.last_name}
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

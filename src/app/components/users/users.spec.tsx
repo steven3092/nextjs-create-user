@@ -23,8 +23,8 @@ const customRender = (children: React.ReactElement) => {
 const mockUsers = jest.fn().mockReturnValue([
   {
     id: 1,
-    name: "lorem ipsum",
-    last_name: "lorem ipsum",
+    name: "lorem",
+    last_name: "ipsum",
     create_date: "lorem ipsum",
   },
 ]);
@@ -59,7 +59,7 @@ describe("Click for deleting user", () => {
   it("should call useDeleteUsers() hook", () => {
     customRender(<Users />);
 
-    const deleteButton = screen.getByText("delete");
+    const deleteButton = screen.getByTestId("delete-user-button");
 
     user.click(deleteButton);
 
