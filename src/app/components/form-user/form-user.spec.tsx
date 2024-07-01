@@ -38,7 +38,7 @@ describe("When fill the form", () => {
     user.type(firstNameInput, "lorem");
     user.type(lastNameInput, "ipsum");
 
-    const submitButton = screen.getByText("Submit");
+    const submitButton = screen.getByText("Add user");
 
     user.click(submitButton);
 
